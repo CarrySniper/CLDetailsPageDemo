@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import <WebKit/WebKit.h> // 苹果推荐使用WKWebView代替UIWebView
 
-
 #define ScreenWidth 		[UIScreen mainScreen].bounds.size.width
 #define ScreenHeight 		[UIScreen mainScreen].bounds.size.height
 
@@ -209,7 +208,8 @@
 		CGFloat offsetY = scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y;
 		/// 如果达到界限值再往上偏移
 		if (offsetY < 0 && -offsetY > kMaxMoveOffSet) {
-			[self gotoDetailAnimation];//进入图文详情页面
+			// 进入详情页面
+			[self gotoDetailsPageAnimation];
 		}
 	}
 	/// 如果滚动的是webView,页面的滚动
@@ -217,25 +217,25 @@
 		/// webView往下偏移超过
 		CGFloat offsetY = scrollView.contentOffset.y;
 		if (offsetY < 0 && -offsetY > kMaxMoveOffSet) {
-			[self gotoInfoPageAnimation];// 返回基本详情界面的动画
+			// 返回列表界面
+			[self gotoInfoPageAnimation];
 		}
 	}
 }
 
-#pragma mark - 跳转
-#pragma mark 进入图文详情页面
-- (void)gotoDetailAnimation {
+#pragma mark - 跳转动画
+#pragma mark 进入详情页面
+- (void)gotoDetailsPageAnimation {
 	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
 		self.detailsWebView.frame = CGRectMake(0, 0, ScreenWidth, self.contentHeight);
-		self.infoTableView.frame = CGRectMake(0, -self.contentHeight, self.infoTableView.frame.size.width, self.contentHeight);
+		self.infoTableView.frame = CGRectMake(0, -self.contentHeight, ScreenWidth, self.contentHeight);
 	} completion:^(BOOL finished) {
 		
 	}];
 }
 
-#pragma mark 返回基本详情界面的动画
+#pragma mark 返回列表界面
 - (void)gotoInfoPageAnimation {
-	
 	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
 		self.infoTableView.frame = CGRectMake(0, 0, ScreenWidth, self.contentHeight);
 		self.detailsWebView.frame = CGRectMake(0, self.contentHeight, ScreenWidth, self.contentHeight);
