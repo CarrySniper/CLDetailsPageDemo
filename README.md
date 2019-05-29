@@ -4,7 +4,7 @@
  ![](https://github.com/cjq002/CLDetailsPageDemo/raw/master/Media/demo.gif) 
  
 #### 定义两个滚动视图控件
-```
+```objc
 /** 信息使用TableView展示，可以展示轮播图，标题、描述，价格属性列表等 */
 @property (nonatomic, strong) UITableView *infoTableView;
 
@@ -12,7 +12,7 @@
 @property (nonatomic, strong) WKWebView *detailsWebView;
 ```
 #### 监听滚动方法实现判断
-```
+```objc
 #pragma mark - UIScrollViewDelegate
 #pragma mark 实时滚动监听
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
